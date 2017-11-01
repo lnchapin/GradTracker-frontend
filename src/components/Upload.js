@@ -5,6 +5,7 @@ import CSVInput from "./CSVInput"
 class Upload extends React.Component {
 
 	handleChange(e) {
+
 		e.preventDefault();
 		console.log(e, 'handleChange')
 	}
