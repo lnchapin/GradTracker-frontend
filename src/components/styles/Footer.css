@@ -1,0 +1,16 @@
+#FooterWrapper{
+  display: grid;
+  height:75px;
+  border-top:1px solid lightgray;
+  grid-template-columns:15% 65% 20%;
+}
+#peopleWrapper{
+  display: grid;
+  height:100%;
+  grid-template-columns: 50% 50%;
+}
+#copyright, #Josc, #Lind, #Kyle, #Josh{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
