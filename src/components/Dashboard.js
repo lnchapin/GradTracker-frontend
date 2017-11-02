@@ -23,9 +23,9 @@ class Dashboard extends React.Component{
 	render() {
 		return(
 			<div>
-				<h1>hi</h1>
+				<h1>Add A Graduated Class</h1>
 				<AddClass />
-				{/* <ViewClass /> */}
+				<ViewClass />
 			</div>
 		)
 	}
