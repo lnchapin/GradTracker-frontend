@@ -8,16 +8,11 @@ class Login extends React.Component {
   }
 
   render() {
-    return <form className="login-form" method="post">
-        <label>Username</label>
-        	<input type="text" name="username"  placeholder="username"/>
-        <label>Password</label>
-        	<input type="text" name="password"  placeholder="password"/>
-        <button className="upload-submit" onClick={e => this.handleChange(e)}>
-          Login
-        </button>
-      </form>;
-  }
+    return(
+      <div>
+    <img src='http://blog.gale.com/wp-content/uploads/2017/09/shutterstock_336872039.jpg' width="1450px"></img>
+    </div>
+  )}
 }
 
 export default Login;
