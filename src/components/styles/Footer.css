@@ -1,8 +1,8 @@
 #FooterWrapper{
   display: grid;
   height:75px;
-  border-top:1px solid lightgray;
   grid-template-columns:15% 65% 20%;
+  border-top:1px solid lightgray;
 }
 #peopleWrapper{
   display: grid;
