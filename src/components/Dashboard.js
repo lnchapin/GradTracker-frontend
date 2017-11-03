@@ -9,23 +9,23 @@ function AddClass() {
 	)
 }
 
-function ViewClass() {
-  return (
-		<div>
-			<ul>
-				<li>Loop over data here</li>
-			</ul>
-		</div>
-	)
-}
+// function ViewClass() {
+//   return (
+// 		<div>
+// 			<ul>
+// 				<li>Loop over data here</li>
+// 			</ul>
+// 		</div>
+// 	)
+// }
 
 class Dashboard extends React.Component{
 	render() {
 		return(
 			<div>
-				<h1>Add A Graduated Class</h1>
+				<h2>Add A Graduated Class</h2>
 				<AddClass />
-				<ViewClass />
+				{/* <ViewClass /> */}
 			</div>
 		)
 	}

@@ -1,10 +1,11 @@
 import React from "react";
 import Papa from "papaparse";
 import axios from "axios";
+import "./styles/upload.css";
 // import CSVInput from "./CSVInput"
 
-const localhost = "http://localhost:3000/graduates/add";
-const heroku = "https://secret-mountain-48217.herokuapp.com/";
+const localhost = "http://localhost:3000";
+// const heroku = "https://secret-mountain-48217.herokuapp.com";
 
 class Upload extends React.Component {
   constructor(props) {
@@ -13,7 +14,13 @@ class Upload extends React.Component {
     this.state = {
       year: "",
       season: "",
+      grad_class: "null",
+      students: [],
+      file: [],
+      status: ''
     };
+    this.handleFiles = this.handleFiles.bind(this);
+    this.updateFile = this.updateFile.bind(this);
   }
 
   handleYearChange(e) {
@@ -26,29 +33,49 @@ class Upload extends React.Component {
     this.setState({ season: e.target.value });
   }
 
-  handleFiles(e) {
-    const csvString = e.target.files[0];
-    console.log(csvString);
-    Papa.parse(csvString, {
+  updateFile(file) {
+    console.log(file.data);
+    this.setState({ file: file.data });
+  }
+
+  handleFiles(csv) {
+    Papa.parse(csv, {
       header: true,
-      complete: function(results) {
-        console.log(results.data, "papaparse");
-        results.data.map(student => {
-          student = {
-            ...student,
-            class_name: 2,
-          };
-          console.log(student);
-          let encodedURI = window.encodeURI(localhost);
-          axios.post(encodedURI, student, { crossdomain: true });
-        });
-      },
+      complete: results => this.updateFile(results),
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e, "handleChange");
+
+    this.setState({
+      grad_class: `${this.state.year}_${this.state.season}`,
+    });
+
+    var csvFile = document.getElementsByClassName("csv-upload")[0].files[0];
+    this.handleFiles(csvFile);
+
+    if (this.state.grad_class !== "null") {
+      axios
+        .post(`${localhost}/gradclass/add/`, {
+          class_name: this.state.grad_class,
+        })
+        .then(data => {
+          return data;
+        })
+        .then(data => {
+          let id = parseInt(data.data);
+          this.state.file.map(student => {
+            axios.post(`${localhost}/graduates/add`, {
+              class_name: id,
+              ...student,
+            });
+          });
+        })
+        .then(() => console.log("added"));
+    }
+   return this.setState({ status: 'complete' }) 
+    // console.log(e, "handleChange");
   }
 
   render() {
@@ -70,18 +97,15 @@ class Upload extends React.Component {
             name="season"
             onChange={e => this.handleSeasonChange(e)}
           >
+            <option></option>
             <option>Fall</option>
             <option>Spring</option>
           </select>
         </div>
         <div>
-          <input
-            type="file"
-            accept=".csv"
-            className="csv-upload"
-            onChange={e => this.handleFiles(e)}
-          />
+          <input type="file" accept=".csv" className="csv-upload" />
         </div>
+
         <button className="upload-submit" onClick={e => this.handleSubmit(e)}>
           add class
         </button>
