@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './styles/Nav.css'
 import axios from 'axios';
 
+//'http://cb4461ab.ngrok.io/graduates/1'
+
 const Nav = () => {
 
 
 	return (
 
 		<div id="NavWrapper">
-		<div id="Nav0" ><button onClick={() => { axios.get('http://cb4461ab.ngrok.io/graduates/1').then(res =>{ console.log(res)} ) }}>Text!</button></div>
+		<div id="Nav0" ><button onClick={() => { axios.get('https://stark-reef-91742.herokuapp.com/sendtext').then(res =>{ console.log(res)} ) }}>Text!</button></div>
 		<div id="Nav1"></div>
 		<div id="Nav2"><a href='http://localhost:3000'>Grad Tracker</a></div>
 		<div id="Nav3"></div>
